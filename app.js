@@ -1,26 +1,3 @@
-const players = [
-  {
-    name: "Leonardo",
-    score: 50,
-    id: 1
-  },
-  {
-    name: "Michelangelo",
-    score: 35,
-    id: 2
-  },
-  {
-    name: "Donatello",
-    score: 85,
-    id: 3
-  },
-  {
-    name: "Raphael",
-    score: 65,
-    id: 4
-  }
-];
-
 const Header = (props) => {
   return (
     <header>
@@ -36,6 +13,7 @@ const Player = (props) => {
       <span className="player-name">
         {props.name}
       </span>
+
       <Counter />
     </div>
   );
@@ -69,27 +47,50 @@ class Counter extends React.Component {
   }
 }
 
-const App = (props) => {
-  return (
-    <div className="scoreboard">
-      <Header 
-        title="Scoreboard"
-        totalPlayers = {props.initialPlayers.length}
-      />
+class App extends React.Component{
+  state = {
+    players:[
 
-      {/* Players list */}
-      {props.initialPlayers.map( player =>
-        <Player 
-          name={player.name}
-          score={player.score}
-          key={player.id.toString()}            
+      {
+        name: "Leonardo",
+        id: 1
+      },
+      {
+        name: "Michelangelo",
+        id: 2
+      },
+      {
+        name: "Donatello",
+        id: 3
+      },
+      {
+        name: "Raphael",
+        id: 4
+      }
+    ]
+};
+    render(){
+
+      return (
+        <div className="scoreboard">
+        <Header 
+          title="Scoreboard"
+          totalPlayers = {this.state.players.length}
         />
-      )}
-    </div>
-  );
+
+        {/* Players list */}
+        {this.state.players.map( player =>
+          <Player 
+            name={player.name}
+            key={player.id.toString()}            
+          />
+        )}
+      </div>
+    );
+  }
 }
 
 ReactDOM.render(
-  <App initialPlayers={players}/>,
+  <App />,
   document.getElementById('root')
 );
