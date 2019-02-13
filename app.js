@@ -1,21 +1,21 @@
 const players = [
   {
-    name: "Frodo",
+    name: "Leonardo",
     score: 50,
     id: 1
   },
   {
-    name: "Sam",
+    name: "Michelangelo",
     score: 35,
     id: 2
   },
   {
-    name: "Gandalf",
+    name: "Donatello",
     score: 85,
     id: 3
   },
   {
-    name: "Gimli",
+    name: "Raphael",
     score: 65,
     id: 4
   }
@@ -35,18 +35,22 @@ const Player = (props) => {
     <div className="player">
       <span className="player-name">
         {props.name}
-        <Counter score={props.score}/>
       </span>
+      <Counter />
     </div>
   );
 }
 
 class Counter extends React.Component {
+  state = {
+    score: 0
+  };
+
   render() {
     return (
       <div className="counter">
         <button className="counter-action decrement"> - </button>
-        <span className="counter-score">{ this.props.score }</span>
+        <span className="counter-score">{ this.state.score }</span>
         <button className="counter-action increment"> + </button>
       </div>
     );
