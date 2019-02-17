@@ -28,9 +28,12 @@ class App extends React.Component {
     ]
   };
 
-  handleScoreChange = delta => {
-    console.log(delta);
+  handleScoreChange = (index, delta) => {
+    this.setState(prevState => ({
+      score: (prevState.players[index].score += delta)
+    }));
   };
+
   handleRemovePlayer = id => {
     this.setState(prevState => {
       return {
