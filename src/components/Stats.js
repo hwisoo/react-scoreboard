@@ -28,7 +28,7 @@ Stats.propTypes = {
     PropTypes.shape({
       score: PropTypes.number
     })
-  )
+  ).isRequired
 };
 
 export default Stats;
