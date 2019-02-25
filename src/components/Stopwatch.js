@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 
 class Stopwatch extends Component {
   state = {
@@ -8,11 +8,11 @@ class Stopwatch extends Component {
   };
 
   componentDidMount() {
-    this.intervalID = setInterval(() => this.tick(), 100);
+    this.interval = setInterval(this.onTick);
   }
 
   componentWillUnmount() {
-    clearInterval(this.intervalID);
+    clearInterval(this.interval);
   }
 
   onStart = () => {
@@ -39,16 +39,6 @@ class Stopwatch extends Component {
         elapsedTime: this.state.elapsedTime + (now - this.state.previousTime),
         previousTime: Date.now()
       });
-    }
-  };
-
-  tick = () => {
-    if (this.state.isRunning) {
-      const now = Date.now();
-      this.setState(prevState => ({
-        previousTime: now,
-        elapsedTime: prevState.elapsedTime + (now - this.state.previousTime)
-      }));
     }
   };
 
