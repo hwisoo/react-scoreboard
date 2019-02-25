@@ -3,7 +3,7 @@ import Player from "./Player";
 import Header from "./Header";
 import AddPlayerForm from "./AddPlayerForm";
 
-class App extends React.Component {
+class Scoreboard extends React.Component {
   state = {
     players: [
       {
@@ -94,4 +94,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Scoreboard;
