@@ -1,7 +1,7 @@
 import React from "react";
-import Player from "./Player";
-import Header from "./Header";
-import AddPlayerForm from "./AddPlayerForm";
+import Player from "../components/Player";
+import Header from "../components/Header";
+import AddPlayerForm from "../components/AddPlayerForm";
 
 class Scoreboard extends React.Component {
   state = {
