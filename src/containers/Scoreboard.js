@@ -1,9 +1,12 @@
 import React from "react";
+import Stopwatch from "../components/Stopwatch";
+import Counter from "../components/Counter";
+import Stats from "../components/Stats";
 import Player from "../components/Player";
 import Header from "../components/Header";
 import AddPlayerForm from "../components/AddPlayerForm";
 
-class Scoreboard extends React.Component {
+export default class Scoreboard extends React.Component {
   state = {
     players: [
       {
@@ -32,31 +35,19 @@ class Scoreboard extends React.Component {
   // player id counter
   prevPlayerId = 4;
 
-  handleScoreChange = (index, delta) => {
-    this.setState(prevState => ({
-      score: (prevState.players[index].score += delta)
-    }));
+  onScoreChange = (index, delta) => {
+    this.state.players[index].score += delta;
+    this.setState(this.state);
   };
 
-  handleAddPlayer = name => {
-    this.setState({
-      players: [
-        ...this.state.players,
-        {
-          name,
-          score: 0,
-          id: (this.prevPlayerId += 1)
-        }
-      ]
-    });
+  onAddPlayer = name => {
+    this.state.players.push({ name: name, score: 0 });
+    this.setState(this.state);
   };
 
-  handleRemovePlayer = id => {
-    this.setState(prevState => {
-      return {
-        players: prevState.players.filter(p => p.id !== id)
-      };
-    });
+  onRemovePlayer = (index) => {
+    this.state.players.splice(index, 1);
+    this.setState(this.state);
   };
 
   getHighScore = () => {
@@ -69,29 +60,25 @@ class Scoreboard extends React.Component {
   };
 
   render() {
-    const highScore = this.getHighScore();
     return (
       <div className="scoreboard">
-        <Header title="Scoreboard" players={this.state.players} />
-
-        {/* Players list */}
-        {this.state.players.map((player, index) => (
-          <Player
-            name={player.name}
-            score={player.score}
-            id={player.id}
-            key={player.id.toString()}
-            index={index}
-            changeScore={this.handleScoreChange}
-            removePlayer={this.handleRemovePlayer}
-            isHighScore={highScore === player.score} // is a player's 'score' prop equal to the high score?
-          />
-        ))}
-
-        <AddPlayerForm addPlayer={this.handleAddPlayer} />
+        <Header players={this.state.players} />
+        <div className="players">
+          {this.state.players.map(function(player, index) {
+             return (
+               <Player
+                 name={player.name}
+                 score={player.score}
+                 key={player.name}
+                 onScoreChange={(delta) => this.onScoreChange(index, delta)}
+                 onRemove={() => this.onRemovePlayer(index)}
+               />
+             );
+           }.bind(this))}
+        </div>
+        <AddPlayerForm onAdd={this.onAddPlayer} />
       </div>
     );
   }
 }
 
-export default Scoreboard;

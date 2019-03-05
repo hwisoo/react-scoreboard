@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-class AddPlayerForm extends React.Component {
+export default class AddPlayerForm extends React.Component {
   static propTypes = {
-    onAdd: PropTypes.func
+    onAdd: PropTypes.func.isRequired,
   };
-  state = {
+  state={
     name: ""
   };
+
 
   onNameChange = e => {
     const name = e.target.value;
@@ -38,4 +39,3 @@ class AddPlayerForm extends React.Component {
   }
 }
 
-export default AddPlayerForm;
