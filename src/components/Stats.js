@@ -23,12 +23,9 @@ const Stats = ({ players }) => {
   );
 };
 
+
 Stats.propTypes = {
-  players: PropTypes.arrayOf(
-    PropTypes.shape({
-      score: PropTypes.number
-    })
-  ).isRequired
+  players: PropTypes.array.isRequired,
 };
 
 export default Stats;
